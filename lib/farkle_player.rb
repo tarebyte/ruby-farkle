@@ -9,9 +9,18 @@ class FarklePlayer
   #
   def initialize ( name )
 
-    @name = name
-    @dice_cup = Hash.new
     @current_score = 0
+    
+    @dice_cup = {
+      :die1 => 0,
+      :die2 => 0,
+      :die3 => 0,
+      :die4 => 0,
+      :die5 => 0,
+      :die6 => 0
+    }
+    
+    @name = name
     @total_score = 0
 
   end
@@ -43,15 +52,7 @@ class FarklePlayer
   #
   def start_turn
 
-    @dice_cup = {
-      :die1 => 0,
-      :die2 => 0,
-      :die3 => 0,
-      :die4 => 0,
-      :die5 => 0,
-      :die6 => 0
-    }
-
+    @dice_cup.each { |k,v| @dice_cup[k] = 0 }
     @current_score = 0
 
   end
