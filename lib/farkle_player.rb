@@ -7,14 +7,33 @@ class FarklePlayer
   # name - This is used for personalization
   # dice_cup - Every player gets a cup of 6 dice to begin with
   #
-  #
   def initialize ( name )
-    
+
     @name = name
     @dice_cup = Hash.new
-    @current_score
+    @current_score = 0
     @total_score = 0
 
+  end
+
+  # Public return what is in the cup
+  # All Hash methods can be called on this method
+  #
+  def current_dice_cup
+    @dice_cup
+  end
+
+  # Public returns the current players score as of this
+  # turn
+  #
+  def current_score
+    @current_score
+  end
+
+  # Public Every dice in @dice_cup gets a new value
+  #
+  def roll_dice
+    @dice_cup.each { |k, v| @dice_cup[k] = Random.rand(1..6) }
   end
 
   # Public start the player out with a clean slate
@@ -37,14 +56,10 @@ class FarklePlayer
 
   end
 
-  # Public Every dice in @dice_cup gets a new value
+  # Public returns the name of the current player
   #
-  # Example
-  # => player1 = FarklePlayer.roll_dice
-  #
-  def roll_dice
-    @dice_cup.each { |k, v| @dice_cup[k] = Random.rand(1..6) }
+  def name
+    @name
   end
-
 
 end
