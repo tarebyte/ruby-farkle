@@ -24,7 +24,7 @@ describe FarklePlayer do
 
   it "returns the given players name that was set" do
     player = FarklePlayer.new "Mark"
-    player.name.should eq("Mark")
+    player.name?.should eq("Mark")
   end
 
 end

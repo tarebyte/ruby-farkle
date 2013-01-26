@@ -61,7 +61,7 @@ class FarklePlayer
 
   # Public returns the name of the current player
   #
-  def name
+  def name?
     @name
   end
 
