@@ -4,8 +4,10 @@ class FarklePlayer
 
   # Public give every player attributes
   #
-  # name - This is used for personalization
+  # current_score - Name sort of explains it
   # dice_cup - Every player gets a cup of 6 dice to begin with
+  # name - This is used for personalization
+  # total_score - Score that player has for the whole game so far 
   #
   def initialize ( name )
 
