@@ -12,7 +12,7 @@ describe FarklePlayer do
   it "starts a player out with 6 dice" do
     player = FarklePlayer.new "Mark"
     player.start_turn
-    player.current_dice_cup.length.should eq(6)
+    player.current_dice_cup.size.should eq(6)
   end
 
   it "sets a value for every dice in the cup that is not 0" do
@@ -26,5 +26,5 @@ describe FarklePlayer do
     player = FarklePlayer.new "Mark"
     player.name.should eq("Mark")
   end
-  
+
 end
