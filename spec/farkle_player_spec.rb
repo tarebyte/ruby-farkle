@@ -1,8 +1,11 @@
 # farkle_player.spec
-require_relative '../lib/farkle_player.rb'
+require_relative '../lib/ruby-farkle/farkle_player.rb'
 
 describe FarklePlayer do
 
+  # Make sure that a player starts
+  # their turn with everything they need
+  #
   it "starts a player on a new turn with a current score of 0" do
     player = FarklePlayer.new "Mark"
     player.start_turn
@@ -15,6 +18,12 @@ describe FarklePlayer do
     player.current_dice_cup.size.should eq(6)
   end
 
+  it "resets the players Farkle count to 0" do
+    player = FarklePlayer.new "Mark"
+    player.start_turn
+    player.current_farkle_count.should eq (0)
+  end
+
   it "sets a value for every dice in the cup that is not 0" do
     player = FarklePlayer.new "Mark"
     player.start_turn
@@ -25,6 +34,29 @@ describe FarklePlayer do
   it "returns the given players name that was set" do
     player = FarklePlayer.new "Mark"
     player.name?.should eq("Mark")
+  end
+
+  # Basic Dice movements
+  #
+  it "removes all 1's and 5's from the game and adds them to the score" do
+    player = FarklePlayer.new "Mark"
+    player.start_turn
+    player.roll_dice
+
+    print "\n- - - - - -\n"
+    player.current_dice_cup.each_value { |value| print "#{value} " }
+
+    if ( player.current_dice_cup.has_value?(1) || player.current_dice_cup.has_value?(5) )
+      print "\nThere was a one or there was a five\n"
+      player.get_all_single_scoring_dice
+    end
+
+    player.current_dice_cup.each_value { |value| print "#{value} " }
+    print "\n- - - - - -\n"
+
+    player.current_dice_cup.has_value?(1).should eq (false)
+    player.current_dice_cup.has_value?(5).should eq (false)
+
   end
 
 end
