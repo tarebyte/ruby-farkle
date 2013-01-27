@@ -57,13 +57,21 @@ they do not have a triplet of 1s for a score of 1000
 but merely three individual 1s for a score of 300.
 
 ##How to run this game
-All you have to do is run
+All you have to do is run:
 
-    ruby play_farkle.rb
+    rake
 
 And let the game begin!
+
+##Testing
+If you are contributing or just want to run the Rspec tests:
+
+    rake spec
+
+This will run every Rspec file in the spec folder
 
 ##What I used
   - Ruby 1.9.3
   - Rspec
   - Tomdoc
+  
