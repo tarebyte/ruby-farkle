@@ -18,12 +18,12 @@ class FarklePlayer
     @current_score = 0
 
     @dice_cup = {
-      :die1 => 0,
-      :die2 => 0,
-      :die3 => 0,
-      :die4 => 0,
-      :die5 => 0,
-      :die6 => 0
+      1 => 0,
+      2 => 0,
+      3 => 0,
+      4 => 0,
+      5 => 0,
+      6 => 0
     }
 
     @farkle_count = 0
@@ -55,9 +55,9 @@ class FarklePlayer
     else 
       false
     end
-  
+
   end
-  
+
   # Public: Return what is in the cup
   # All Hash methods can be called on this method
   #
@@ -134,6 +134,30 @@ class FarklePlayer
     else
       nil
 
+    end
+
+  end
+
+  # Public: Collect a single scoring die that the user chooses
+  #
+  def collect_single_scoring_die ( die )
+
+    if @dice_cup.has_value?(die)
+
+      if die == 1
+        @current_score += 100
+      else
+        @current_score += 50
+      end
+
+      key = 1
+      while @dice_cup.length != (@dice_cup.length - 1) do
+        @dice_cup.delete(key) if @dice_cup[key] == die
+        key += 1
+      end
+
+    else
+      nil
     end
 
   end
