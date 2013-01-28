@@ -36,6 +36,42 @@ describe FarklePlayer do
     player.name?.should eq("Mark")
   end
 
+  it "checks for a Farkle twice" do
+    player = FarklePlayer.new "Mark"
+    player.start_turn
+    player.roll_dice
+    
+    print "\n"
+    player.list_dice_in_cup
+    
+    if player.farkle?
+      print "Farkle!\n"
+    
+    else
+      
+      print "No Farkle\n"
+
+      if player.are_there_any_three_or_more_sets?
+        player.collect_all_three_of_a_kind
+
+      elsif player.are_there_any_single_scoring_dice?
+        player.collect_all_single_scoring_dice
+      end        
+      
+      print "\n"
+      player.list_dice_in_cup
+
+      if player.farkle?
+        print "Farkle!\n"
+
+      else
+        print "No Farkle\n"
+      end
+
+    end
+    
+  end
+
   # Basic Dice movements
   #
   it "removes all 1's and 5's from the game and adds them to the score" do

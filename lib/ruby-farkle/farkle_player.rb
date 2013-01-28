@@ -46,6 +46,18 @@ class FarklePlayer
 
   end
 
+  # Public: Returns whether there are any single scoring dice
+  #
+  def are_there_any_single_scoring_dice?
+
+    if !self.are_there_any_three_or_more_sets?
+      ( @dice_cup.has_value?(1) || @dice_cup.has_value?(5) )
+    else 
+      false
+    end
+  
+  end
+  
   # Public: Return what is in the cup
   # All Hash methods can be called on this method
   #
@@ -94,6 +106,52 @@ class FarklePlayer
 
   end
 
+  # Public: Remove all three of a kinds 
+  # and add them to the current score
+  #
+  # Returns nil if nothing was removed
+  #
+  def collect_all_three_of_a_kind
+
+    three_or_more = self.get_all_three_of_a_kind_or_more
+
+    if three_or_more != nil
+
+      three_or_more.each do |three_value|
+
+        if three_value == 1 # secial case because three 1's get you 1000 points
+          @current_score += 1000
+        else
+          @current_score += ( three_value * 100 )
+        end
+
+        3.times do
+          @dice_cup.delete_if {|k, v| v == three_value }
+        end
+
+      end
+
+    else
+      nil
+
+    end
+
+  end
+
+  # Public: Check is the user farkled, and if so add 1 to there farkle count
+  #
+  # Return true is found otherwise false
+  def farkle?
+
+    if !self.are_there_any_single_scoring_dice? && !self.are_there_any_three_or_more_sets?
+      @farkle_count += 1
+      true
+    else
+      false
+    end
+
+  end
+
   # Public: Tests if the player has 3 of a kind in their cup
   #
   # Returns all of the numbers that have three of a kind or more
@@ -127,36 +185,10 @@ class FarklePlayer
 
   end
 
-  # Public: Remove all three of a kinds 
-  # and add them to the current score
+  # Public: List out all of the dice the user rolled
   #
-  # Returns nil if nothing was removed
-  #
-  def collect_all_three_of_a_kind
-
-    three_or_more = self.get_all_three_of_a_kind_or_more
-
-    if three_or_more != nil
-
-      three_or_more.each do |three_value|
-
-        if three_value == 1 # secial case because three 1's get you 1000 points
-          @current_score += 1000
-        else
-          @current_score += ( three_value * 100 )
-        end
-
-        3.times do
-          @dice_cup.delete_if {|k, v| v == three_value }
-        end
-
-      end
-
-    else
-      nil
-
-    end
-
+  def list_dice_in_cup
+    @dice_cup.each_value { |value| print "#{value} "}
   end
 
   # Public: Every dice in @dice_cup gets a new value
