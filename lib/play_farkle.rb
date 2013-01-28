@@ -19,3 +19,8 @@ system("clear")
 
 print "Hello #{farkle_players[0].name?} and #{farkle_players[1].name?} let's begin"
 
+# Main Game, in this game whoever gets to 1000 points first wins!
+begin
+
+end while ( farkle_players[0].total_score < 1000 || farkle_players[1].total_score < 1000 )
+
