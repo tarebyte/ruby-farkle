@@ -16,11 +16,18 @@ player2 = FarklePlayer.new name
 farkle_players << player2
 
 system("clear")
-
-print "Hello #{farkle_players[0].name?} and #{farkle_players[1].name?} let's begin"
+index = 0
+print "Hello #{farkle_players[0].name?} and #{farkle_players[1].name?} let's begin\n"
 
 # Main Game, in this game whoever gets to 1000 points first wins!
-begin
+#begin
 
-end while ( farkle_players[0].total_score < 1000 || farkle_players[1].total_score < 1000 )
+# User has started their turn
+farkle_players[index].start_turn
+farkle_players[index].roll_dice
+
+print "You rolled the following\n"
+farkle_players[index].list_dice_in_cup
+
+#end while ( farkle_players[0].total_score < 1000 || farkle_players[1].total_score < 1000 )
 
