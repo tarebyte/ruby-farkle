@@ -43,19 +43,39 @@ describe FarklePlayer do
     player.start_turn
     player.roll_dice
 
-    print "\n- - - - - -\n"
-    player.current_dice_cup.each_value { |value| print "#{value} " }
-
     if ( player.current_dice_cup.has_value?(1) || player.current_dice_cup.has_value?(5) )
-      print "\nThere was a one or there was a five\n"
-      player.get_all_single_scoring_dice
+      player.collect_all_single_scoring_dice
     end
-
-    player.current_dice_cup.each_value { |value| print "#{value} " }
-    print "\n- - - - - -\n"
 
     player.current_dice_cup.has_value?(1).should eq (false)
     player.current_dice_cup.has_value?(5).should eq (false)
+
+  end
+
+  it "confirms that if there is a set of three or more it is found" do
+    player = FarklePlayer.new "Mark"
+    player.start_turn
+    player.roll_dice
+
+    if player.are_there_any_three_or_more_sets?
+      ( player.get_all_three_of_a_kind_or_more != nil ).should eq(true)
+    end
+  end
+
+  it "removes all sets of threes in the dice_cup" do
+    player = FarklePlayer.new "Mark"
+    player.start_turn
+    player.roll_dice
+
+    if player.are_there_any_three_or_more_sets?
+
+      player.collect_all_three_of_a_kind
+      player.are_there_any_three_or_more_sets?.should eq(false)
+
+    else
+      player.are_there_any_three_or_more_sets?.should eq(false)
+
+    end
 
   end
 
