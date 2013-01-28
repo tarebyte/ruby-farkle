@@ -32,6 +32,20 @@ class FarklePlayer
 
   end
 
+  # Public: Lets the use know if there are sets of three
+  #
+  # Returns true if there are any sets if not it returns false
+  #
+  def are_there_any_three_or_more_sets?
+
+    if self.get_all_three_of_a_kind_or_more != nil
+      true
+    else
+      false
+    end
+
+  end
+
   # Public: Return what is in the cup
   # All Hash methods can be called on this method
   #
@@ -59,7 +73,7 @@ class FarklePlayer
   # Each 1 gets you 100 points
   # Each 5 gets you  50 points
   #
-  def get_all_single_scoring_dice
+  def collect_all_single_scoring_dice
 
     @dice_cup.each do |k, v|
 
@@ -77,6 +91,71 @@ class FarklePlayer
     #
     @dice_cup.delete_if { |k, v| @dice_cup[k] == 1 }
     @dice_cup.delete_if { |k, v| @dice_cup[k] == 5 }
+
+  end
+
+  # Private: Tests if the player has 3 of a kind in their cup
+  #
+  # Returns all of the numbers that have three of a kind or more
+  # or nil if there wasn't anything
+  #
+  def get_all_three_of_a_kind_or_more
+
+    three_of_a_kind_or_more = []
+
+    dice_point_total = {
+      1 => 0,
+      2 => 0,
+      3 => 0,
+      4 => 0,
+      5 => 0,
+      6 => 0
+    }
+
+    # Since the keys and the values are of the same type
+    # I can put in the value in place of the key value
+    # and increment by one
+    @dice_cup.each_value { |value| dice_point_total[value] += 1 }
+
+    dice_point_total.each { |k, v| three_of_a_kind_or_more << k if v >= 3 }
+
+    if three_of_a_kind_or_more.length > 0
+      three_of_a_kind_or_more
+    else
+      nil
+    end
+
+  end
+
+  # Public: Remove all three of a kinds 
+  # and add them to the current score
+  #
+  # Returns nil if nothing was removed
+  #
+  def collect_all_three_of_a_kind
+
+    three_or_more = self.get_all_three_of_a_kind_or_more
+
+    if three_or_more != nil
+
+      three_or_more.each do |three_value|
+
+        if three_value == 1 # secial case because three 1's get you 1000 points
+          @current_score += 1000
+        else
+          @current_score += ( three_value * 100 )
+        end
+
+        3.times do
+          @dice_cup.delete_if {|k, v| v == three_value }
+        end
+
+      end
+
+    else
+      nil
+
+    end
 
   end
 
@@ -107,4 +186,3 @@ class FarklePlayer
   end
 
 end
-
