@@ -143,8 +143,9 @@ class FarklePlayer
   # Return true is found otherwise false
   def farkle?
 
-    if !self.are_there_any_single_scoring_dice? && !self.are_there_any_three_or_more_sets?
+    if !self.are_there_any_three_or_more_sets? && !self.are_there_any_single_scoring_dice? 
       @farkle_count += 1
+      @current_score = 0
       true
     else
       false
@@ -209,6 +210,12 @@ class FarklePlayer
     @dice_cup.each { |k,v| @dice_cup[k] = 0 }
     @farkle_count = 0
 
+  end
+
+  # Public: Returns the players total score
+  #
+  def total_score
+    @total_score
   end
 
   # Public returns the name of the current player
