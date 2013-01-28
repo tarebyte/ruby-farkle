@@ -94,7 +94,7 @@ class FarklePlayer
 
   end
 
-  # Private: Tests if the player has 3 of a kind in their cup
+  # Public: Tests if the player has 3 of a kind in their cup
   #
   # Returns all of the numbers that have three of a kind or more
   # or nil if there wasn't anything
