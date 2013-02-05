@@ -1,9 +1,9 @@
 source "http://rubygems.org"
 
 gem 'rake'
-gem 'pry'
 gem 'ghpreview'
 
-group :test do
+group :development, :test do
   gem "rspec"
+  gem "pry"
 end
