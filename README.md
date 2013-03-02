@@ -73,5 +73,4 @@ This will run every Rspec file in the spec folder
 ##What I used
   - Ruby 1.9.3
   - Rspec
-  - Tomdoc
-  
+
