@@ -9,7 +9,7 @@ class FarklePlayer < FarkleMoves
   #
   #  player1 = FarklePlayer.new "Mark"
   #
-  def initialize ( name )
+  def initialize( name )
     @name = name
   end
 
@@ -24,7 +24,7 @@ class FarklePlayer < FarkleMoves
   def single_scoring_dice?
 
     if !self.set_of_three?
-      ( @dice_cup.has_value?(1) || @dice_cup.has_value?(5) )
+      ( @dice_cup.include?(1) || @dice_cup.include?(5) )
     else
       false
     end
@@ -34,13 +34,14 @@ class FarklePlayer < FarkleMoves
   # Public: List out all of the dice the user rolled
   #
   def in_cup?
-    @dice_cup.each_value { |value| print "#{value} "}
+    @dice_cup.each { |value| print "#{value} "}
   end
 
-  # Public: Every dice in @dice_cup gets a new value
+  # Public: For the number of dice the player has add newly
+  # rolled dice to the cup
   #
   def roll_dice
-    @dice_cup.each { |k, v| @dice_cup[k] = Random.rand(1..6) }
+    self.number_of_dice.times { self.dice_cup << Random.rand(1..6) }
   end
 
   # Public: Start the player out with a clean slate
@@ -49,9 +50,8 @@ class FarklePlayer < FarkleMoves
   def start_turn
 
     self.current_score = 0
-    self.dice_cup.each { |k,v| @dice_cup[k] = 0 }
+    self.number_of_dice = 6
     self.farkle_count = 0
-
   end
 
 end
