@@ -13,7 +13,7 @@
 # For single scoring dice (1/5)
 # => 'Check' to see if there are any single scoring dice (returns true or false) 
 # => 'Collect' a single scoring dice and score accordingly
-# => 'Collect' all of a certain specification of single scoring dice (all ones or all fives)
+# => 'Collect' all of a certain specification of single scoring dice (2 ones and a five)
 # => 'Collect' all single scoring dice
 #
 # For sets of three
@@ -36,16 +36,15 @@ class FarkleMoves
 
   attr_accessor :dice_cup, :number_of_dice, :current_score, :farkle_count, :total_score
 
-  ########################################################
-  ## Methods that do not deal with single or three sets ##
-  ########################################################
+  ##########
+  ## Misc ##
+  ##########
 
   # Public: Check is the user farkled, and if so 
   # iterate the count by one
   #
   # Return true is found otherwise false
   def farkle?
-
     if !self.three_set? && !self.single_scoring?
       @farkle_count += 1
       @current_score = 0
@@ -65,9 +64,9 @@ class FarkleMoves
 
 
 
-  ################################################
-  ## Methods that deal with single scoring dice ##
-  ################################################
+  #########################
+  ## Single scoring die ##
+  #########################
 
   # Public: Pulls of all of the single scoring dice
   # from the cup and adds them to the current score
@@ -78,19 +77,20 @@ class FarkleMoves
   #
   def collect_single_dice(*value)
 
-    @dice_cup.each do |v|
-
-      case @dice_cup[k]
-      when 1
-        @current_score += 100
-      when 5
-        @current_score += 50
+    if value.length.zero?
+      @dice_cup.each do |single_die|
+        remove_one_and_score(single_die)
       end
 
+      @dice_cup.delete(1)
+      @dice_cup.delete(5)
+    
+    else
+      value.to_a.flatten.each do |v|
+        @dice_cup.delete_at(@dice_cup.index(v))
+        remove_one_and_score(v)
+      end
     end
-
-    @dice_cup.delete_if { |i| i == 1 || i == 5 }
-
   end
 
   # Public: Check the set to see if there
@@ -108,9 +108,9 @@ class FarkleMoves
 
 
 
-  ########################################################
-  ## Methods that deal with sets of three dice in a set ##
-  ########################################################
+  ###################
+  ## Sets of Three ##
+  ###################
 
   # Public: Collects and scores the what set of three
   # the user wants
@@ -161,6 +161,19 @@ class FarkleMoves
 
 
   private
+  
+  # Private: decrement the number of dice the player
+  # is allowed to have by one and increment their score
+  #
+  def remove_one_and_score(single_die)
+    @current_score += 100 if single_die == 1
+    @current_score +=  50 if single_die == 5
+    @number_of_dice -= 1
+  end
+
+  # Private: decrement the number of dice the player
+  # is allowed to have by three and increment their score
+  #
   def remove_three_and_score(k, v)
     3.times { v.pop }
     k == 1 ? @current_score += 1000 : @current_score += (k * 100)
