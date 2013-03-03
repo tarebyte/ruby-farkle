@@ -162,7 +162,7 @@ class FarkleMoves
   end
 
   def to_s
-    PrintDice.print_dice(self.dice_cup)
+    PrintDice.print_dice(@dice_cup)
   end
 
   private
