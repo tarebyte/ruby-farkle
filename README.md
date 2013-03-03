@@ -74,3 +74,6 @@ This will run every Rspec file in the spec folder
   - Ruby 1.9.3
   - Rspec
 
+##TODO
+  - Get storing dice to work, I'm kind of lazy and don't want to
+
