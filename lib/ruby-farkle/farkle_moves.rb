@@ -165,6 +165,18 @@ class FarkleMoves
     PrintDice.print_dice(@dice_cup)
   end
 
+
+
+  ################
+  ## Store dice ##
+  ################
+
+  #def store_dice
+
+  #end
+
+
+
   private
   
   # Private: decrement the number of dice the player
