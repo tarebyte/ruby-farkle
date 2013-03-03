@@ -12,7 +12,7 @@ class FarkleBrain < FarkleMoves
     #print "3. Store dice for later"
 
     print "Choice: "
-    choice = gets.chomp
+    choice = gets.chomp.to_i
 
     case choice
     when 1
@@ -37,20 +37,20 @@ class FarkleBrain < FarkleMoves
       print "2. Select which dice you wish to remove\n"
 
       print "Choice: "
-      choice = gets.chomp
+      choice = gets.chomp.to_i
 
       case choice
       when 1
         self.collect_single_dice
       when 2
         print "Please enter the number of dice you want to remove: "
-        remove_count = get.chomp
+        remove_count = gets.chomp.to_i
 
         removed_dice = Array.new
 
         remove_count.times do
           print "value: "
-          remove_dice << gets.chomp
+          removed_dice << gets.chomp.to_i
           print "\n"
         end
 
@@ -72,14 +72,14 @@ class FarkleBrain < FarkleMoves
       print "2. Remove a set of three\n"
       print "3. Nothing\n"
       print "Choice: "
-      player_choice = gets.chomp
+      player_choice = gets.chomp.to_i
 
       case player_choice
       when 1
         self.collect_three_set
       when 2
         print "\nWhat set of three would you like to remove?\n"
-        set_choice = gets.chomp
+        set_choice = gets.chomp.to_i
         self.collect_three_set(set_choice)
         print "Set of #{set_choice}'s removed"
       else
