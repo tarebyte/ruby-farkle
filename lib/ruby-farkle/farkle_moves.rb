@@ -32,6 +32,7 @@ class FarkleMoves
     @dice_cup = Array.new
     @farkle_count   = 0
     @number_of_dice = 6
+    @printer = PrintDice.new
     @saved_dice = Array.new
     @total_score    = 0
 
@@ -162,7 +163,7 @@ class FarkleMoves
   end
 
   def to_s
-    PrintDice.print_dice(@dice_cup)
+    @printer.print_dice(@dice_cup)
   end
 
 
