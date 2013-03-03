@@ -21,20 +21,23 @@
 # => 'Collect' a single given set of three defined by the user and score accordingly
 # => 'Collect' all instances of sets of three and score them accordingly
 #
- 
+
+require_relative 'print_dice.rb'
+
 class FarkleMoves
 
   def initialize
 
-    @dice_cup = Array.new
-    @number_of_dice = 6
     @current_score  = 0
+    @dice_cup = Array.new
     @farkle_count   = 0
+    @number_of_dice = 6
+    @saved_dice = Array.new
     @total_score    = 0
 
   end
 
-  attr_accessor :dice_cup, :number_of_dice, :current_score, :farkle_count, :total_score
+  attr_accessor :current_score, :dice_cup, :farkle_count, :number_of_dice, :saved_dice, :total_score
 
   ##########
   ## Misc ##
@@ -158,7 +161,9 @@ class FarkleMoves
     false # No sets of three... :-(
   end
 
-
+  def to_s
+    PrintDice.print_dice(self.dice_cup)
+  end
 
   private
   
