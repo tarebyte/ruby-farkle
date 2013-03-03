@@ -58,7 +58,7 @@ class FarkleMoves
   end
 
   # Public: reset a users setting that deal with the current turn
-  # 
+  #
   def reset
     @dice_cup.clear
     @number_of_dice = 6
@@ -87,7 +87,7 @@ class FarkleMoves
 
       @dice_cup.delete(1)
       @dice_cup.delete(5)
-    
+
     else
       value.to_a.flatten.each do |v|
         @dice_cup.delete_at(@dice_cup.index(v))
@@ -148,7 +148,7 @@ class FarkleMoves
 
   # Public run a check to see if there is a set of three
   # in the current dice collection
-  # 
+  #
   def three_set?
     collected_dice = @dice_cup.group_by { |i| i }
 
@@ -178,7 +178,7 @@ class FarkleMoves
 
 
   private
-  
+
   # Private: decrement the number of dice the player
   # is allowed to have by one and increment their score
   #

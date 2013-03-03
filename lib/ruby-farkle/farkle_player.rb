@@ -13,7 +13,7 @@ class FarklePlayer < FarkleBrain
   # they can play the game
   #
   def options?
-    self.run_all_options      
+    self.run_all_options
   end
   # Public: List out all of the dice the user rolled
   #
